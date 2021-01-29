@@ -1,3 +1,17 @@
+
+NGINX is one of the most popular web servers in the world. Not only is NGINX a fast and reliable static web server, it is also used by a ton of developers as a reverse-proxy that sits in front of their APIs. 
+
+In this tutorial we will take a look at the NGINX Official Docker Image and how to use it. We’ll start by running a static web server locally then we’ll build a custom image to house our web server and the files it needs to serve. We’ll finish up by taking a look at creating a reverse-proxy server for a simple REST API and then how to share this image with your team.
+
+Prerequisites
+To complete this tutorial, you will need the following:
+
+Free Docker Account
+Docker running locally
+An IDE or text editor to use for editing files. I would recommend VSCode
+
+
+
 ## 1.0 Running your first container
 Now that you have everything setup, it's time to get our hands dirty. In this section, you are going to run an [Alpine Linux](http://www.alpinelinux.org/) container (a lightweight linux distribution) on your system and get a taste of the `docker run` command.
 
@@ -15,6 +29,37 @@ REPOSITORY              TAG                 IMAGE ID            CREATED         
 alpine                 latest              c51f86c28340        4 weeks ago         1.109 MB
 hello-world             latest              690ed74de00f        5 months ago        960 B
 ```
+
+NGINX Official Image
+The Docker Official Images are a curated set of Docker repositories hosted on Docker Hub that have been scanned for vulnerabilities and are maintained by Docker employees and upstream maintainers.
+
+Official Images are a great place for new Docker users to start. These images have clear documentation, promote best practices, and are designed for the most common use cases.
+
+Let’s take a look at the NGINX official image. Open your favorite browser and log into Docker. If you do not have a Docker account yet, you can create one for free.
+
+Once you have logged into Docker, enter “NGINX” into the top search bar and press enter. The official NGINX image should be the first image in the search results. You will see the “OFFICIAL IMAGE” label in the top right corner of the search entry.
+
+https://lh6.googleusercontent.com/FJh7W5WYZ06vCV241juS-hTPbyGgzkCJ3671kqEmW7-Vo2dOzRaTvUsFymqZiNtbktHq7JYU-1KsRd9fWxuIX5Aicvlz1UwzOp0ryR38NTwrnvhC4pAsnkg1UfJ4xWccgFgPj5Gj
+
+Running a basic web server
+Let’s run a basic web server using the official NGINX image. Run the following command to start the container.
+
+$ docker run -it --rm -d -p 8080:80 --name web nginx
+
+With the above command, you started running the container as a daemon (-d) and published port 8080 on the host network. You also named the container web using the --name option. 
+
+Open your favorite browser and navigate to http://localhost:8080   You should see the following NGINX welcome page.
+
+https://lh4.googleusercontent.com/TBXwvnvDDxQAMJdPnPHkM8iG-z9_qKtjb7dfyu36eV1K0dutD5YE20v_9WRZUEvWHepXq86rbPKtMiBkZFVOsEk68iHA3X7uxmQ_Ponm87kqJhtexPALT-_A_K2fOCvoD3L9ks4g
+
+This is great but the purpose of running a web server is to serve our own custom html files and not the default NGINX welcome page.
+
+Let’s stop the container and take a look at serving our own HTML files.
+
+$ docker stop web
+
+
+
 
 ### 1.1 Docker Run
 Great! Let's now run a Docker **container** based on this image. To do that you are going to use the `docker run` command.
