@@ -161,6 +161,77 @@ Another key concept is the idea of _official images_ and _user images_. (Both of
 
 - **User images** are images created and shared by users like you. They build on base images and add additional functionality. Typically these are formatted as `user/image-name`. The `user` value in the image name is your Docker Store user or organization name.
 
+
+Adding Custom HTML
+By default, Nginx looks in the /usr/share/nginx/html directory inside of the container for files to serve. We need to get our html files into this directory. A fairly simple way to do this is use a mounted volume. With mounted volumes, we are able to link a directory on our local machine and map that directory into our running container.
+
+Let’s create a custom html page and then serve that using the nginx image.
+
+Create a directory named site-content. In this directory add an index.html file and add the following html to it:
+
+Copy files into folder where we'll build Dockerfile
+
+Now run the following command, which is the same command as above, but now we’ve added the -v flag to create a bind mount volume. This will mount our local directory ~/site-content locally into the running container at: /usr/share/nginx/html
+
+$ docker run -it --rm -d -p 8080:80 --name web -v ~/site-content:/usr/share/nginx/html nginx
+
+Open your favorite browser and navigate to http://localhost:8080 and you should see the above html rendered in your browser window.
+
+
+Build Custom NGINX Image
+Bind mounts are a great option for running locally and sharing files into a running container. But what if we want to move this image around and have our html files moved with it?
+
+There are a couple of options available but one of the most portable and simplest ways to do this is to copy our html files into the image by building a custom image.
+
+To build a custom image, we’ll need to create a Dockerfile and add our commands to it.
+
+In the same directory, create a file named Dockerfile and paste the below commands.
+
+FROM nginx:latest
+COPY ./index.html /usr/share/nginx/html/index.html
+We start building our custom image by using a base image. On line 1, you can see we do this using the FROM command. This will pull the nginx:latest image to our local machine and then build our custom image on top of it.
+
+Next, we COPY our index.html file into the /usr/share/nginx/html directory inside the container overwriting the default index.html file provided by nginx:latest image.
+
+You’ll notice that we did not add an ENTRYPOINT or a CMD to our Dockerfile. We will use the underlying ENTRYPOINT and CMD provided by the base NGINX image.
+
+To build our image, run the following command:
+
+$ docker build -t webserver .
+The build command will tell Docker to execute the commands located in our Dockerfile. You will see a similar output in your terminal as below:
+
+https://lh3.googleusercontent.com/2p49V4yAQHpimfNbMTL89xQiNPGP3xBakNrOhT2sRytiFa0IVVUAr_StlPS6n-zQFRZTZzK4pV4cjVg3mddoZnEpIwK2r_OJ_N_3iWsTchLPloBZdqm-FpBsOGhJwqka9DXrlIlD
+
+Now we can run our image in a container but this time we do not have to create a bind mount to include our html.
+
+$ docker run -it --rm -d -p 8080:80 --name web webserver
+
+Open your browser and navigate to http://localhost:8080 to make sure our html page is being served correctly.
+
+In this article we walked through running the NGINX official image, adding our custom html files, building a custom image based off of the official image and configuring the NGINX as a reverse proxy. We finished up by pushing our custom image to Docker so we could share with others on our team. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### 2.3 Create your first image
 
 >**Note:** The code for this section is in this repository in the [flask-app](https://github.com/docker/labs/tree/master/beginner/flask-app) directory.
