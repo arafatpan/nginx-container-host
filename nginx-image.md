@@ -7,6 +7,7 @@ Created for Web Application Design 354 at Illinois State University
 Now that you have learned the basics of pulling and using container images, this lab will ask you to practice your new knowledge of Docker containers. After refreshing your skills, we will build a container image containing your HTML source code created in Assignment 2. That container will launch a Web server and serve your pages. Finally, we will take the Dockerfile and other source code used to create your Docker image and upload them to a repository that you create. 
 
 ![grab screen snip here](./images/sm-camera.png)
+
 Since this assignment is part tutorial and part tasks for you to complete, you will need to take snapshots along the way to prove you worked through the steps. Whenever you see this camera symbol, please take a snapshot or screen snippet and place it in a folder you will later submit.
 
 ### Getting Started
@@ -66,6 +67,7 @@ php          7.4-apache   899ab23566b7   8 days ago    414MB
 nginx        latest       f6d0b4767a6c   2 weeks ago   133MB
 ```
 Since that worked, let's test running this.  Run the following command to start the container and take a screen snippet or capture that shows a successful pull and images on your system.
+
 ![grab screen snip here](./images/sm-camera.png)
 
 #### 1.1 Docker Run
@@ -80,6 +82,7 @@ Open your favorite browser and navigate to http://localhost:8080 .   You should 
 ![Default nginx running](https://lh4.googleusercontent.com/TBXwvnvDDxQAMJdPnPHkM8iG-z9_qKtjb7dfyu36eV1K0dutD5YE20v_9WRZUEvWHepXq86rbPKtMiBkZFVOsEk68iHA3X7uxmQ_Ponm87kqJhtexPALT-_A_K2fOCvoD3L9ks4g)
 
 ![grab screen snip here](./images/sm-camera.png)
+
 What happened? Behind the scenes, a lot of stuff happened. When you call `run`,
 1. The Docker client contacts the Docker daemon
 2. The Docker daemon checks local store to see if the image (nginx in this case) is available locally, and if not, downloads it from Docker Store. (Since we have issued `docker pull nginx` before, the download step is not necessary)

@@ -3,4 +3,4 @@
 
 [2.0 Build Image for Hosting Your Pages](./build-image.md)
 
-repo-push.md
+[3.0 Submitting Push to GitHub.com](./repo-push.md)

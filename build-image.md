@@ -37,6 +37,7 @@ $ docker rm -f web
 >**Note:** A cool feature is that you do not need to specify the entire `CONTAINER ID`. You can just specify a few starting characters and if it is unique among all the containers that you have launched, the Docker client will intelligently pick it up.
 
 ![grab screen snip here](./images/sm-camera.png)
+
 Now that you've seen how to run a webserver inside a Docker container, how do you serve your pages from a Docker image? This is the question we'll explore in the next section.
 
 Run `docker ps -a` to make sure the containers are gone.
@@ -73,6 +74,7 @@ Open your favorite browser and navigate to http://localhost:8080 and you should 
 $ docker run -it --rm -d -p 8080:80 --name web -v "$PWD":/usr/share/nginx/html nginx
 ```
 Take a screenshot here to show that you had success with putting your custom index.html file in the volume mapped to the container.
+
 ![grab screen snip here](./images/sm-camera.png)
 
 Finally, to finish this part of the exercise we will create the folder that will contain your personal webpages that you created for the previous assignment. Then we will test NGINX container running and hosting your files.
@@ -93,7 +95,9 @@ drwxr-xr-x  2 kevin kevin  4096 Jan 28 17:48 js/
 kevin@Elitebook-14:~/nginx-hosting$ docker run -it --rm -d -p 8080:80 --name web -v "$PWD":/usr/share/nginx/html nginx
 f6f5419394c51373dac564ae7e541d7529711623977bcc498e164d179f4a260d
 ```
+
 ![grab screen snip here](./images/sm-camera.png)
+
 ![my Bootstrap page](./images/browser02.png)
 
 All good! Stop and remove some earlier containers and images to clean up. Get ready for the next section in which we build a docker image. 
@@ -131,6 +135,7 @@ $ docker build -t webserver .
 The build command will tell Docker to execute the commands located in our Dockerfile. You will see a similar output in your terminal as below:
 
 ![grab screen snip here](./images/sm-camera.png)
+
 ![build output](https://lh3.googleusercontent.com/2p49V4yAQHpimfNbMTL89xQiNPGP3xBakNrOhT2sRytiFa0IVVUAr_StlPS6n-zQFRZTZzK4pV4cjVg3mddoZnEpIwK2r_OJ_N_3iWsTchLPloBZdqm-FpBsOGhJwqka9DXrlIlD)
 
 Check to see that you have a new image with __docker images__.
@@ -142,6 +147,7 @@ $ docker run -it --rm -d -p 8080:80 --name web webserver
 Open your browser and navigate to http://localhost:8080 to make sure your html pages are being served correctly.
 
 ![grab screen snip here](./images/sm-camera.png)
+
 In this tutorial, we walked through running the NGINX official image, adding our custom html files, building a custom image based off of the official image and configuring the NGINX as a reverse proxy. We finished up by pushing our custom image to Docker so we could share with others on our team.
 
 >**Note:** If you want to learn more about Dockerfiles, check out [Best practices for writing Dockerfiles](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/).

@@ -1,4 +1,4 @@
-### Submitting and push to GitHub.com
+### 3.0 Submitting and Push to GitHub.com
 
 In order to submit this assignment, you will create your own Git repository to store your Bootstrap pages and your Dockerfile. This should be all that I will need to pull your project, do a Docker build and view your pages being served. You should test this all the way through and make sure that your image works as expected and does not have broken links.
 
@@ -25,4 +25,5 @@ Username for 'https://github.com': keschae@ilstu.edu
 ```
 
 Your final screen capture should show the initialization of the Git repo and setting of the remote repository.
+
 ![grab screen snip here](./images/sm-camera.png)
