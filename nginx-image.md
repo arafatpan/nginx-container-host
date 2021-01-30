@@ -1,15 +1,20 @@
+## Assignment - Using containers, building your own container image to host your pages and store it all in a Git repo
 
-NGINX is one of the most popular web servers in the world. Not only is NGINX a fast and reliable static web server, it is also used by a ton of developers as a reverse-proxy that sits in front of their APIs. 
+Created for Web Application Design 354 at Illinois State University 
 
-In this tutorial we will take a look at the NGINX Official Docker Image and how to use it. We’ll start by running a static web server locally then we’ll build a custom image to house our web server and the files it needs to serve. We’ll finish up by taking a look at creating a reverse-proxy server for a simple REST API and then how to share this image with your team.
+### Part 1
 
-Prerequisites
+Now that you have learned the basics of pulling and using container images this lab will ask you continue to practice your new knowledge of Docker containers. After some refreshing your skills we will build a container image containing your HTML source code created in Assignment 2. That container will launch a Web server and serve your pages. Finally, we will take the Dockerfile and other source code  used to create your Docker image and upload them to repository that you create. 
+
+NGINX is one of the most popular web servers in the world. In this tutorial we will take a look at the NGINX Official Docker Image and how to use it. We’ll start by running a static web server locally then we’ll build a custom image to house our web server and the files it needs to serve.
+
+#### Prerequisites
 To complete this tutorial, you will need the following:
 
 Free Docker Account
 Docker running locally
-An IDE or text editor to use for editing files. I would recommend VSCode
-
+Unix/Linux Terminal
+An IDE or text editor, recommending VS Code
 
 
 ## 1.0 Running your first container
