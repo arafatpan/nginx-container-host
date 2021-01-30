@@ -1,12 +1,16 @@
-## Assignment - Using containers, building your own container image to host your pages and store it all in a Git repo
+## Assignment - Using containers, building your own image to host your pages, and store it in a Git repo
 
 Created for Web Application Design 354 at Illinois State University 
 
-### Part 1
+#### What You Need to Know
 
-Now that you have learned the basics of pulling and using container images this lab will ask you continue to practice your new knowledge of Docker containers. After some refreshing your skills we will build a container image containing your HTML source code created in Assignment 2. That container will launch a Web server and serve your pages. Finally, we will take the Dockerfile and other source code  used to create your Docker image and upload them to a repository that you create. 
+Now that you have learned the basics of pulling and using container images, this lab will ask you to practice your new knowledge of Docker containers. After refreshing your skills, we will build a container image containing your HTML source code created in Assignment 2. That container will launch a Web server and serve your pages. Finally, we will take the Dockerfile and other source code used to create your Docker image and upload them to a repository that you create. 
 
-NGINX is one of the most popular web servers in the world. In this tutorial we will take a look at the NGINX Official Docker Image and how to use it. We’ll start by running a static web server locally then we’ll build a custom image to house our web server and the files it needs to serve.
+![grab screen snip here](./images/sm-camera.png)
+Since this assignment is part tutorial and part tasks for you to complete, you will need to take snapshots along the way to prove you worked through the steps. Whenever you see this camera symbol, please take a snapshot or screen snippet and place it in a folder you will later submit.
+
+### Getting Started
+NGINX (pronounced "engine-X") is one of the most popular web servers in the world. In this tutorial we will take a look at the NGINX Official Docker Image and how to use it. We’ll start by running a static web server locally then we’ll build a custom image to house our web server and the files it needs to serve.
 
 #### Prerequisites
 To complete this tutorial, you will need the following:
@@ -14,9 +18,10 @@ To complete this tutorial, you will need the following:
 Free Docker account
 Docker running locally
 Unix/Linux Terminal
-An IDE or text editor, recommending VS Code
+VS Code
+Git installed and operating from your terminal
 
-Run the following command in order to test that Docker is installed and working well on your system. 
+Run the following command to test that Docker is installed and working well on your system. 
 ```
 docker run hello-world
 Unable to find image 'hello-world:latest' locally
@@ -33,8 +38,6 @@ To generate this message, Docker took the following steps:
  ...
 ```
 ## 1.0 Finding a base image
-
-NGINX Official Image
 
 The Docker Official Images are a curated set of Docker repositories hosted on Docker Hub that have been scanned for vulnerabilities and are maintained by Docker employees and upstream maintainers.
 
@@ -62,10 +65,11 @@ python       3            4b9378be0bb9   4 days ago    885MB
 php          7.4-apache   899ab23566b7   8 days ago    414MB
 nginx        latest       f6d0b4767a6c   2 weeks ago   133MB
 ```
-Since that worked, let's test running this.  Run the following command to start the container.
+Since that worked, let's test running this.  Run the following command to start the container and take a screen snippet or capture that shows a successful pull and images on your system.
+![grab screen snip here](./images/sm-camera.png)
 
 #### 1.1 Docker Run
-Great! Let's now run a Docker **container** based on this image. To do that you are going to use the `docker run` command.
+Great! Let's now run a Docker **container** based on this image. To do that, you are going to use the `docker run` command.
 ```
 $ docker run -it --rm -d -p 8080:80 --name web nginx
 ```
@@ -75,6 +79,7 @@ Open your favorite browser and navigate to http://localhost:8080 .   You should 
 
 ![Default nginx running](https://lh4.googleusercontent.com/TBXwvnvDDxQAMJdPnPHkM8iG-z9_qKtjb7dfyu36eV1K0dutD5YE20v_9WRZUEvWHepXq86rbPKtMiBkZFVOsEk68iHA3X7uxmQ_Ponm87kqJhtexPALT-_A_K2fOCvoD3L9ks4g)
 
+![grab screen snip here](./images/sm-camera.png)
 What happened? Behind the scenes, a lot of stuff happened. When you call `run`,
 1. The Docker client contacts the Docker daemon
 2. The Docker daemon checks local store to see if the image (nginx in this case) is available locally, and if not, downloads it from Docker Store. (Since we have issued `docker pull nginx` before, the download step is not necessary)
@@ -87,7 +92,7 @@ docker ps -a
 CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                  NAMES
 03fc46c7889d   nginx     "/docker-entrypoint.…"   6 minutes ago   Up 6 minutes   0.0.0.0:8080->80/tcp   web
 ```
-This is great but the purpose of running a web server is to serve our own custom html files and not the default NGINX welcome page.
+This is great, but the purpose of running a web server is to serve our own custom html files and not the default NGINX welcome page.
 
 Let’s stop the container and take a look at serving our own HTML files.
 ```

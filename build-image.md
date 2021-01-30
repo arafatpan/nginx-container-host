@@ -1,5 +1,3 @@
-![grab screen snip here](./images/sm-camera.png)
-
 ## 2.0 Web Server with Docker
 Great! So you have now looked at `docker run`, played with some Docker containers and also got the hang of some terminology. Armed with all this knowledge, you are now ready to get to the real stuff &#8212; deploying web applications with Docker.
 
@@ -38,6 +36,7 @@ $ docker rm -f web
 ```
 >**Note:** A cool feature is that you do not need to specify the entire `CONTAINER ID`. You can just specify a few starting characters and if it is unique among all the containers that you have launched, the Docker client will intelligently pick it up.
 
+![grab screen snip here](./images/sm-camera.png)
 Now that you've seen how to run a webserver inside a Docker container, how do you serve your pages from a Docker image? This is the question we'll explore in the next section.
 
 Run `docker ps -a` to make sure the containers are gone.
@@ -72,12 +71,15 @@ $ docker run -it --rm -d -p 8080:80 --name web -v ~/site-content:/usr/share/ngin
 Open your favorite browser and navigate to http://localhost:8080 and you should see the above html rendered in your browser window. A better command to issue is to use "$PWD" in plce of your local path. This tells docker to map your current working directory to the nginx web document directory in the container.
 ```
 $ docker run -it --rm -d -p 8080:80 --name web -v "$PWD":/usr/share/nginx/html nginx
-``` 
+```
+Take a screenshot here to show that you had success with putting your custom index.html file in the volume mapped to the container.
+![grab screen snip here](./images/sm-camera.png)
+
 Finally, to finish this part of the exercise we will create the folder that will contain your personal webpages that you created for the previous assignment. Then we will test NGINX container running and hosting your files.
 
-First we need you to return to your home directory (cd ~). From there you of an create the folder name that you will keep and use to build your custom Docker image and your Git repository that will be submitted for this assignment. Create your folder/directory and name it _nginx-hosting_.
+First we need you to return to your home directory (cd ~). From there you will create the folder name that you will keep and use to build your custom Docker image and your Git repository that will be submitted for this assignment. Create your folder/directory and name it _nginx-hosting_.
 
-Copy your personal Bootstrap webpages and supporting files into the folder with the appropriate file and folder structure. Your index file must be at the root level of your new nginx-hosting folder. You do not want it inside of a subdirectory. Next test the web server by running a __docker run__ like the last one we ran to prove that it is is serving your pages.
+Copy your personal Bootstrap webpages and supporting files into the folder with the appropriate file and folder structure. Your index file must be at the root level of your new nginx-hosting folder. You do not want it inside of a subdirectory. Next, test the web server by running a __docker run__ like the last one we ran to prove that it is serving your pages.
 ```
 kevin@Elitebook-14:~$ cd nginx-hosting/
 kevin@Elitebook-14:~/nginx-hosting$ ls -l
@@ -91,6 +93,7 @@ drwxr-xr-x  2 kevin kevin  4096 Jan 28 17:48 js/
 kevin@Elitebook-14:~/nginx-hosting$ docker run -it --rm -d -p 8080:80 --name web -v "$PWD":/usr/share/nginx/html nginx
 f6f5419394c51373dac564ae7e541d7529711623977bcc498e164d179f4a260d
 ```
+![grab screen snip here](./images/sm-camera.png)
 ![my Bootstrap page](./images/browser02.png)
 
 All good! Stop and remove some earlier containers and images to clean up. Get ready for the next section in which we build a docker image. 
@@ -98,11 +101,11 @@ All good! Stop and remove some earlier containers and images to clean up. Get re
 ### 2.2 Building a Docker Image
 
 ##### Build Custom NGINX Image
-Bind mounts are a great option for running locally and sharing files into a running container. But what if we want to move this image around and have our html files moved with it?
+Bind mounts are a great option for running locally and sharing files in a running container. But what if we want to move this image around and have our html files moved with it?
 
 In our previous section I asked you to create a folder, nginx-hosting, which we will use to build your image. In that folder, you should have already copied your necessary files to serve your webpages created in the previous assignment. 
 
-There are a couple of options available but one of the most portable and simplest ways to do this is to copy our html files into the image by building a custom image.
+There are a couple of options available, but one of the most portable and simplest ways to do this is to copy our html files into the image by building a custom image.
 
 A [Dockerfile](https://docs.docker.com/engine/reference/builder/) is a text file that contains a list of commands that the Docker daemon calls while creating an image. The Dockerfile contains all the information that Docker needs to know to run the app &#8212; a base Docker image to run from, location of your project code, any dependencies it has, and what commands to run at start-up. It is a simple way to automate the image creation process.
 
@@ -124,8 +127,10 @@ To build our image, run the following command:
 ```
 $ docker build -t webserver .
 ```
+
 The build command will tell Docker to execute the commands located in our Dockerfile. You will see a similar output in your terminal as below:
 
+![grab screen snip here](./images/sm-camera.png)
 ![build output](https://lh3.googleusercontent.com/2p49V4yAQHpimfNbMTL89xQiNPGP3xBakNrOhT2sRytiFa0IVVUAr_StlPS6n-zQFRZTZzK4pV4cjVg3mddoZnEpIwK2r_OJ_N_3iWsTchLPloBZdqm-FpBsOGhJwqka9DXrlIlD)
 
 Check to see that you have a new image with __docker images__.
@@ -136,9 +141,10 @@ $ docker run -it --rm -d -p 8080:80 --name web webserver
 
 Open your browser and navigate to http://localhost:8080 to make sure your html pages are being served correctly.
 
-In this article we walked through running the NGINX official image, adding our custom html files, building a custom image based off of the official image and configuring the NGINX as a reverse proxy. We finished up by pushing our custom image to Docker so we could share with others on our team.
+![grab screen snip here](./images/sm-camera.png)
+In this tutorial, we walked through running the NGINX official image, adding our custom html files, building a custom image based off of the official image and configuring the NGINX as a reverse proxy. We finished up by pushing our custom image to Docker so we could share with others on our team.
 
 >**Note:** If you want to learn more about Dockerfiles, check out [Best practices for writing Dockerfiles](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/).
 
 ## Next Step
-For the final steps in the tutorial head over to [3.0 Git Push to Repo](./repo-push.md)
+For the final steps in the tutorial, head over to [3.0 Git Push to Repo](./repo-push.md)
