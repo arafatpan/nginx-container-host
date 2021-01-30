@@ -32,7 +32,7 @@ To generate this message, Docker took the following steps:
  1. The Docker client contacted the Docker daemon.
  ...
 ```
-## 1.0 Running your first container
+## 1.0 Finding a base image
 
 NGINX Official Image
 
@@ -100,9 +100,9 @@ $ docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 ```
 
-Since no containers are running, you see a blank line. Let's try a more useful variant: `docker ps -a`
+Since no containers are running, you see a blank line.
 
-You should also be aware that running the `run` command with the `-it` flags attaches to an interactive tty in the container. Then you can run many commands in the container. 
+You should also be aware that running the `run` command with the `-it` flags attaches to an interactive tty in the container. This is often used to run the shell and run many commands in the container. 
 
 That concludes a whirlwind tour of the `docker run` command which would most likely be the command you'll use most often. It makes sense to spend some time getting comfortable with it. To find out more about `run`, use `docker run --help` to see a list of all flags it supports. As you proceed further, we'll see a few more variants of `docker run`.
 
