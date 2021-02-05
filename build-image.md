@@ -67,11 +67,11 @@ From your Linux home directory, create a directory named site-content. In this d
 ```
 Now run the following command, which is the same command as above, but now we’ve added the -v flag to create a bind mount volume. This will mount our local directory ~/site-content locally into the running container at: /usr/share/nginx/html
 ```
-$ docker run -it --rm -d -p 8080:80 --name web -v ~/site-content:/usr/share/nginx/html nginx
+$ docker run -it --rm -d -p 8080:80 --name web -v ~/site-content:/usr/share/nginx/html/ nginx
 ```
 Open your favorite browser and navigate to http://localhost:8080 and you should see the above html rendered in your browser window. A better command to issue is to use "$PWD" in plce of your local path. This tells docker to map your current working directory to the nginx web document directory in the container.
 ```
-$ docker run -it --rm -d -p 8080:80 --name web -v "$PWD":/usr/share/nginx/html nginx
+$ docker run -it --rm -d -p 8080:80 --name web -v "$PWD":/usr/share/nginx/html/ nginx
 ```
 Take a screenshot here to show that you had success with putting your custom index.html file in the volume mapped to the container.
 
@@ -119,7 +119,7 @@ In the same directory, create a file named Dockerfile and paste the below comman
 
 ```
 FROM nginx:latest
-COPY ./* /usr/share/nginx/html/
+COPY . /usr/share/nginx/html/
 ```
 We start building our custom image by using a base image. On line 1, you can see we do this using the FROM command. This will pull the nginx:latest image to our local machine and then build our custom image on top of it.
 
